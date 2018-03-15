@@ -1,5 +1,6 @@
-package com.main;
+package com.mapper.api;
 
+import com.mapper.vo.User;
 import java.util.List;
 
 public interface UserMapper {

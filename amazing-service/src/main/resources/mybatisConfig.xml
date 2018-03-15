@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="com/resources/mybatis/db.properties">
+    <properties resource="db.properties">
         
     </properties>
     
@@ -14,7 +14,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.main.User" alias="user"/>
+        <typeAlias type="com.mapper.vo.User" alias="user"/>
     </typeAliases>
 
     <environments default="development">
@@ -30,6 +30,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/resources/mybatis/UserMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
     </mappers>
 </configuration>

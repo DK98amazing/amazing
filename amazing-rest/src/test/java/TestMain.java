@@ -1,7 +1,5 @@
-package test;
-
-import com.main.User;
-import com.main.UserMapper;
+import com.mapper.api.UserMapper;
+import com.mapper.vo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,7 +23,7 @@ public class TestMain {
 
     @Before
     public void beforeRun() {
-        String resource = "com/resources/mybatis/mybatisConfig.xml";
+        String resource = "mybatisConfig.xml";
         InputStream inputStream = null;
         try {
             inputStream = Resources.getResourceAsStream(resource);
