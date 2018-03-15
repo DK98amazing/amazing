@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,6 +71,15 @@ public class TestMain {
 
     @Test
     public void runC() {
-
+        JedisPool jedisPool = new JedisPool("localhost", 6379);
+        Jedis jedis = jedisPool.getResource();
+        jedis.set("demo", "demo");
+        System.out.println(jedis.get("demo"));
+        if (null != jedis) {
+            jedis.close();
+        }
+        if (null != jedisPool) {
+            jedisPool.close();
+        }
     }
 }
