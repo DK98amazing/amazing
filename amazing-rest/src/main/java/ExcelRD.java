@@ -69,7 +69,6 @@ public class ExcelRD {
     }
 
     //TestMain.runB()运行。
-    @Test
     public void runB(List<User> users) {
         try {
             Workbook workbook = new HSSFWorkbook();
