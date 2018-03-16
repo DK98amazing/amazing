@@ -1,3 +1,2 @@
 # amazing
 This is a demo for my first project.
-If you want to develop a software(Server-side)，you can tell me by update this doc...
