@@ -13,6 +13,7 @@ import redis.clients.jedis.JedisPool;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.List;
 
 public class TestMain {
     private String user = "root";
@@ -62,8 +63,10 @@ public class TestMain {
     public void runB() {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         try {
-            User user = userMapper.findUserById(1);
-            System.out.println(user);
+            List<User> users = userMapper.findUserByName("wangxiaojun");
+            new ExcelRD().runB(users);
+
+//            System.out.println(users);
         } catch (Exception e) {
             e.printStackTrace();
         }

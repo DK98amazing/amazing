@@ -83,6 +83,49 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <!--akka cluster-->
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-cluster_2.12</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-stream_2.12</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+
+        <!--Microsoft Office(excel word ppt)read && write-->
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
+        </dependency>
 
     </dependencies>
 
