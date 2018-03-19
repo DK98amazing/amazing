@@ -1,4 +1,4 @@
-import com.mapper.api.UserMapper;
+import com.mapper.api.mybatisMapper.UserMapper;
 import com.mapper.vo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

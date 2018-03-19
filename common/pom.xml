@@ -83,7 +83,25 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
-        <!--akka cluster-->
+        <!--akka-->
+        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor -->
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.12</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-remote -->
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-remote_2.12</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-cluster-tools -->
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-cluster-tools_2.12</artifactId>
+            <version>2.5.4</version>
+        </dependency>
         <dependency>
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-cluster_2.12</artifactId>
@@ -94,6 +112,7 @@
             <artifactId>akka-stream_2.12</artifactId>
             <version>2.5.4</version>
         </dependency>
+
 
         <!--Microsoft Office(excel word ppt)read && write-->
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
@@ -126,6 +145,36 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.0</version>
         </dependency>
+
+        <!-- distribute-->
+        <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.9</version>
+            <type>pom</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo-common -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo-common</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <!--zkclient-->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.7</version>
+        </dependency>
+
+
+
 
     </dependencies>
 

@@ -1,6 +1,7 @@
-package com.mapper.api;
+package com.mapper.api.mybatisMapper;
 
 import com.mapper.vo.User;
+
 import java.util.List;
 
 public interface UserMapper {
