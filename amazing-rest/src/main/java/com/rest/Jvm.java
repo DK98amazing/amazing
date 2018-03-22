@@ -1,16 +1,10 @@
-import com.Distributed.UserServiceImpl;
+package com.rest;
+
 import com.alipay.jarslink.api.*;
-import com.alipay.jarslink.api.impl.ModuleLoaderImpl;
-import com.alipay.jarslink.api.impl.ModuleManagerImpl;
-import com.alipay.jarslink.api.impl.ModuleServiceImpl;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.mapper.api.distributed.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,16 +15,25 @@ import java.util.Map;
 import java.util.concurrent.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:META-INF/spring/jarslink.xml"})
+@ContextConfiguration(locations = {"../../META-INF.spring/jarslink.xml"})
 public class Jvm {
-
-    @Autowired
-    private ModuleService moduleService;
 
     static {
         i = 0;
 //        System.out.println(i);
     }
+
+    public void setModuleService(ModuleService moduleService) {
+        this.moduleService = moduleService;
+    }
+
+    public ModuleService getModuleService() {
+        return moduleService;
+    }
+
+    @Autowired
+    private ModuleService moduleService;
+
     public static int i = 0;
     @Test
     public void runA() {
@@ -133,13 +136,8 @@ public class Jvm {
         moduleConfig.setProperties(properties);
         moduleConfig.setModuleUrl(ImmutableList.of(url));
 
-//        ModuleLoaderImpl loader = new ModuleLoaderImpl();
-//        loader.setApplicationContext(new ClassPathXmlApplicationContext());
-//        ModuleManagerImpl manager = new ModuleManagerImpl();
-//        ModuleServiceImpl service = new ModuleServiceImpl();
-//        service.setModuleLoader(loader);
-//        service.setModuleManager(manager);
         Module module = moduleService.loadAndRegister(moduleConfig);
         System.out.println(module.getActions());
+        System.out.println(module.getAction("HELLO WORLD"));
     }
 }
