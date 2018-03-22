@@ -1,4 +1,4 @@
-package Distributed;
+package com.Distributed;
 
 import com.mapper.api.distributed.UserService;
 

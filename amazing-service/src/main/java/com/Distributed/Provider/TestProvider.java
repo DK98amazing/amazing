@@ -1,11 +1,12 @@
 package com.Distributed.Provider;
 
-import Distributed.UserServiceImpl;
+import com.Distributed.UserServiceImpl;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.ServiceConfig;
 import com.mapper.api.distributed.UserService;
+import com.mapper.vo.User;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

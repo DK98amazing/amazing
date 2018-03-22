@@ -12,7 +12,7 @@ public class ExcelRD {
     static String path2;
     static FileInputStream fileInputStream;
     static FileOutputStream fileInputStream2;
-    static {
+    /**static {
         path = "C:\\Users\\HZ08900\\Desktop\\Demo.xls";
         path2 = "C:\\Users\\HZ08900\\Desktop\\Demo2.xls";
         File excel = new File(path);
@@ -28,7 +28,7 @@ public class ExcelRD {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Test
     public void runA() {
@@ -121,5 +121,17 @@ public class ExcelRD {
         int month = date.getMonth();
         int day = date.getDay();
         return year + "-" + month + "-" + day;
+    }
+
+//    @Test
+    public static void main (String args[]) {
+        for(char i='s'; i<'z'; i++) {
+            try {
+                Thread.sleep(100 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(i);
+        }
     }
 }
