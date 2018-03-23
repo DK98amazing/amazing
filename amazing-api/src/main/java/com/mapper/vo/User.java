@@ -3,7 +3,7 @@ package com.mapper.vo;
 import java.util.Date;
 
 public class User {
-    private int id;
+    private int id; //唯一标识符
     private String username;// 用户姓名
     private String sex;// 性别
     private Date birthday;// 生日

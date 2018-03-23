@@ -3,9 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mapper.api.UserMapper">
+<mapper namespace="com.mapper.api.mybatisMapper.UserMapper">
+    
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="address" column="address"/>
+    </resultMap>
 
     <select id="findUserById" parameterType="int" resultType="user">
+        SELECT * FROM user WHERE id=#{value}
+    </select>
+
+    <select id="findUserById2" parameterType="int" resultMap="userMap">
         SELECT * FROM user WHERE id=#{value}
     </select>
 

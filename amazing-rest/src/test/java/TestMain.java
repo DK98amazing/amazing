@@ -76,6 +76,17 @@ public class TestMain {
     }
 
     @Test
+    public void runB2() {
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        try {
+            User user = userMapper.findUserById2(1);
+            System.out.println(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void runC() {
         JedisPool jedisPool = new JedisPool("localhost", 6379);
         Jedis jedis = jedisPool.getResource();
