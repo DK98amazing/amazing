@@ -136,12 +136,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo-common -->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>dubbo-common</artifactId>-->
-            <!--<version>2.6.1</version>-->
-        <!--</dependency>-->
+         <!--https://mvnrepository.com/artifact/com.alibaba/dubbo-common-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo-common</artifactId>
+            <version>2.6.1</version>
+        </dependency>
         <!--zkclient-->
         <dependency>
             <groupId>com.101tec</groupId>
