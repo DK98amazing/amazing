@@ -82,6 +82,18 @@
             <artifactId>akka-stream_2.12</artifactId>
             <version>2.5.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-agent -->
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-agent_2.12</artifactId>
+            <version>2.5.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-distributed-data_2.12</artifactId>
+            <version>2.5.11</version>
+        </dependency>
+
 
 
         <!--Microsoft Office(excel word ppt)read && write-->
