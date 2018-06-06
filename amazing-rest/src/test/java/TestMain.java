@@ -188,4 +188,13 @@ public class TestMain {
         testService.serviceManager.startAsync();
     }
 
+    @Test
+    public void runH() {
+        String s = "edec3e6d-59ec-4cf8-ac3c-081e2a54a89fbd849167-77c1-429c-9cdd-619be6680869";
+        System.out.println(s.substring(0, 36).length());
+        System.out.println(s.substring(0, 36));
+        System.out.println(s.substring(36, 72).length());
+        System.out.println(s.substring(36, 72));
+    }
+
 }

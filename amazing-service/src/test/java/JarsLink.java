@@ -1,3 +1,4 @@
+import com.google.common.base.Preconditions;
 import javafx.scene.effect.SepiaTone;
 import jnr.ffi.annotations.In;
 import org.junit.Test;
@@ -19,5 +20,17 @@ public class JarsLink {
         switch (1) {
             case 1: System.out.println("111111");
         }
+    }
+
+    @Test
+    public void runB() {
+        String s = null;
+        try {
+
+            Preconditions.checkNotNull(s, "string is null");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print("dsdsdsds");
     }
 }

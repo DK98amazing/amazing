@@ -1,21 +1,53 @@
-import java.util.concurrent.Executors;
+import org.junit.Test;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class TestThreadLocal {
-    public static void main(String args[]) {
-        final ThreadLocal<JarsLink> threadLocal = new ThreadLocal<JarsLink>();
-        for (int i=0; i<100; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    if (null == threadLocal.get()) {
-                        threadLocal.set(new JarsLink());
-                        System.out.println("-------------------------------");
-                    }
-                    System.out.println(threadLocal.get() + " ");
+    private static Map<String, String> map = new ConcurrentHashMap<String, String>();
+    private static Lock lock = new ReentrantLock();
+    static {
+        map.put("1", "1");
+    }
+    static class Executo implements Runnable {
+        @Override
+        public void run() {
+            try {
+//                map.put("1", "1");
+                try {
+                    lock.lock();
+                    Thread.sleep(5 * 1000);
+                    System.out.println(Thread.currentThread().getName());
+                } finally {
+                    lock.unlock();
                 }
-            }).start();
+//                synchronized (map.get("1")) {
+//                    Thread.sleep(5 * 1000);
+//                    System.out.println(Thread.currentThread().getName());
+//                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        threadLocal.remove();
+    }
+    public static void main(String args[]) {
+        Executo executo = new Executo();
+        new Thread(executo).start();
+        new Thread(executo).start();
+    }
 
+    @Test
+    public void runA() {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(1, 1);
+        map.put(2, 2);
     }
 }
