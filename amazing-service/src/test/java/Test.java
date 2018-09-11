@@ -1,7 +1,9 @@
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.*;
+import jnr.ffi.annotations.In;
 import scala.Int;
+import scala.ScalaReflectionException;
 
 import javax.annotation.Nullable;
 import javax.xml.crypto.Data;
@@ -12,9 +14,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.UnaryOperator;
+
+import static com.google.common.util.concurrent.MoreExecutors.directExecutor;
 
 public class Test {
+    public static volatile ListenableFuture<String> listenableFuture;
     public static void main(String args[]) throws ExecutionException, InterruptedException {
 //        SettableFuture settableFuture = SettableFuture.create();
 //        ScheduledExecutorService service = Executors.newScheduledThreadPool(5);
@@ -75,6 +83,55 @@ public class Test {
 //        future1.cancel(false);
 //        System.out.println(future1.isDone());
 //        System.out.println(future1.get());
+//        AtomicReference<HashMap> reference = new AtomicReference<>();
+//        reference.getAndSet(new HashMap());
 
+        SettableFuture<String> future = SettableFuture.create();
+
+        future.cancel(false);
+        System.out.println(future.get());
+        System.out.println(future.isCancelled());
+
+
+//        AtomicReference<HashMap<String, String>> reference = new AtomicReference<>(new HashMap<>());
+//        reference.get().put("2", "2");
+//        reference.updateAndGet(UnaryOperator.identity());
+//
+//        SettableFuture<String> settableFuture = SettableFuture.create();
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(10000);
+//                settableFuture.set("2");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//
+//
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(500);
+//                System.out.println(Thread.currentThread().getName());
+//                while (true) {
+//                    if (!Thread.currentThread().isInterrupted()) {
+//                        System.out.println(listenableFuture.get());
+//                    }
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//        new Thread(() -> {
+//            try {
+//                System.out.println(Thread.currentThread().getName());
+//                Thread.sleep(1000);
+//                listenableFuture.cancel(true);
+//                System.out.println(listenableFuture.isCancelled());
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
     }
 }

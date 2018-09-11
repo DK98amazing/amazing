@@ -13,6 +13,11 @@
     <version>1.0.0.0</version>
     <packaging>jar</packaging>
 
+    <issueManagement>
+        <system>jira</system>
+        <url>http://jira.baidu.com/banseon</url>
+    </issueManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

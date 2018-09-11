@@ -98,6 +98,16 @@
             <artifactId>spring-web</artifactId>
             <version>4.3.14.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.7</version>
+        </dependency>
     </dependencies>
 
 </project>
