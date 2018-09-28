@@ -23,4 +23,9 @@ public class Tests {
     public void setAnInt(int anInt) {
         this.anInt = anInt;
     }
+
+    public static void main(String[] args) {
+        System.out.println(3 * Math.pow(2, 12));
+        System.out.print(3 << 12);
+    }
 }
