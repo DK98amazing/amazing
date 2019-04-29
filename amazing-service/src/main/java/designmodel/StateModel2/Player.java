@@ -42,4 +42,9 @@ public class Player {
     public void peekCards() {
         current.peekCards();
     }
+
+    public static void main(String args[]) throws ClassNotFoundException {
+        Class cla = Class.forName("designmodel.StateModel2.Player");
+        System.out.println(cla.getName());
+    }
 }
