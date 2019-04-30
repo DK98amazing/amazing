@@ -15,10 +15,10 @@ public class TestSort {
     private static Integer[] array3 = { 1, 4, 7, 9, 5, 6, 0, 0, 3, 2, 8 };
 
     public static void main(String[] args) {
-        System.out.println("冒泡排序：" + sortByMaopao(array));
-        System.err.println("快速排序：" + sortByQuick(array1, 0, array1.length - 1));
-        System.out.println("选择排序：" + sortBySelect(array2));
-        System.err.println("插入排序：" + sortByInsert(array3));
+        System.out.println("冒泡排序 O(N2)：" + sortByMaopao(array));
+        System.err.println("快速排序 O(N2)：" + sortByQuick(array1, 0, array1.length - 1));
+        System.out.println("选择排序 O(N*logN)：" + sortBySelect(array2));
+        System.err.println("插入排序 O(N2)：" + sortByInsert(array3));
     }
 
     private static List<Integer> sortByMaopao(Integer[] array) {
@@ -42,11 +42,19 @@ public class TestSort {
             while (low < high && array[high] >= temp) {
                 high--;
             }
-            array[low] = array[high];
+            if (low < high) {
+                array[low] = array[high];
+                low++;
+            }
+
             while (low < high && array[low] <= temp) {
                 low++;
             }
-            array[high] = array[low];
+            if (low < high) {
+                array[high] = array[low];
+                high--;
+            }
+
         }
         array[low] = temp;
         return low;
