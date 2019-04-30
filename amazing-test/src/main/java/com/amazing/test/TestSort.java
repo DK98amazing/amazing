@@ -23,7 +23,7 @@ public class TestSort {
         System.out.println("堆排序 O(N*logN)：" + sortByHeap(array4));
     }
 
-    private static List<Integer> sortByMaopao(Integer[] array) {
+    public static List<Integer> sortByMaopao(Integer[] array) {
         int size = array.length;
         int temp = 0;
         for (int i = 0; i < size - 1; i++) {
@@ -62,7 +62,7 @@ public class TestSort {
         return low;
     }
 
-    private static List<Integer> sortByQuick(Integer[] array, int low, int high) {
+    public static List<Integer> sortByQuick(Integer[] array, int low, int high) {
         if (array.length > 0) {
             if (low < high) {
                 int middle = getMiddle(array, low, high);
@@ -90,7 +90,7 @@ public class TestSort {
         return Arrays.asList(array);
     }
 
-    private static List<Integer> sortByInsert(Integer[] array) {
+    public static List<Integer> sortByInsert(Integer[] array) {
         int size = array.length;
         int temp;
         for (int i = 0; i < size - 1; i++) {
@@ -125,7 +125,7 @@ public class TestSort {
     }
 
     // 构建堆
-    public static void buildArrayToHeap(Integer[] array) {
+    private static void buildArrayToHeap(Integer[] array) {
         if (array == null || array.length == 1)
             return;
         //递推公式就是 int root = 2*i, int left = 2*i+1, int right = 2*i+2;
@@ -137,7 +137,7 @@ public class TestSort {
     }
 
     //大顶堆
-    public static void buildMaxHeap(Integer[] array, int heapSize, int index) {
+    private static void buildMaxHeap(Integer[] array, int heapSize, int index) {
         int left = index * 2 + 1; // 左子节点
         int right = index * 2 + 2; // 右子节点
         int maxValue = index; // 暂时定在Index的位置就是最大值
@@ -158,7 +158,7 @@ public class TestSort {
     }
 
     //小顶堆
-    public static void buildMinHeap(Integer[] array, int heapSieze, int index) {
+    private static void buildMinHeap(Integer[] array, int heapSieze, int index) {
         int left = index * 2 + 1; // 左子节点
         int right = index * 2 + 2; // 右子节点
         int maxValue = index; // 暂时定在Index的位置就是最小值
@@ -179,7 +179,7 @@ public class TestSort {
     }
 
     // 数组元素交换
-    public static void swap(Integer[] a, int i, int j) {
+    private static void swap(Integer[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
