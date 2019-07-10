@@ -17,8 +17,6 @@
         <module>amazing-artifacts</module>
         <module>features</module>
         <module>common</module>
-        <module>test-nodemap</module>
-        <module>amazing-test</module>
     </modules>
 
     <dependencies>
