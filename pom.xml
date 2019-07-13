@@ -11,14 +11,14 @@
     <name>${project.artifactId}</name>
 
     <modules>
+        <module>common</module>
+        <module>amazing-api</module>
         <module>amazing-service</module>
         <module>amazing-rest</module>
-        <module>amazing-api</module>
         <module>amazing-artifacts</module>
         <module>features</module>
-        <module>common</module>
-        <module>test-nodemap</module>
-        <module>amazing-test</module>
+        <!--<module>test-nodemap</module>
+        <module>amazing-test</module>-->
     </modules>
 
     <dependencies>
@@ -36,6 +36,27 @@
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>22.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.0.0</version>
         </dependency>
     </dependencies>
 
