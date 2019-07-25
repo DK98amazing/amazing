@@ -1,7 +1,5 @@
 package com.amazing.test;
 
-import org.I0Itec.zkclient.IZkDataListener;
-import org.I0Itec.zkclient.ZkClient;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 

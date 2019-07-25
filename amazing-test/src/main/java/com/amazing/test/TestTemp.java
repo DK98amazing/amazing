@@ -1,9 +1,12 @@
 package com.amazing.test;
 
-import redis.clients.jedis.Jedis;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * TestTemp.
@@ -11,8 +14,10 @@ import java.util.List;
  * @author liguoyao
  */
 public class TestTemp {
-    public static void main(String[] args) {
-        Jedis jedis = new Jedis("10.0.11.134", 6379);
+    public static void main(String[] args) throws IOException, ConfigurationException {
+        PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration();
+        propertiesConfiguration.read(new InputStreamReader(new FileInputStream(new File("D:\\Application\\VNote\\noteRoot\\ROOT\\new_note_001.md"))));
+        System.err.println(propertiesConfiguration.getHeader());
     }
 
     private static void get() {
