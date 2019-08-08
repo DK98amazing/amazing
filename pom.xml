@@ -16,6 +16,8 @@
         <module>amazing-api</module>
         <module>amazing-artifacts</module>
         <module>features</module>
+		
+		
         <module>common</module>
         <module>amazing-test</module>
     </modules>
