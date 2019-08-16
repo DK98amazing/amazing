@@ -23,6 +23,8 @@ public class RabbitMqProducer {
                 channel.exchangeDeclare(RabbitUtil.getExchangeName(), BuiltinExchangeType.DIRECT, true);
                 System.err.println("queue: " + RabbitUtil.getQueueName());
                 channel.queueBind(RabbitUtil.getQueueName(), RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey());
+                channel.confirmSelect();
+                channel.basicQos(5);
                 String content = String.format("当前时间：%s", new Date().getTime());
                 channel.addConfirmListener(new ConfirmListener() {
                     @Override
@@ -45,7 +47,7 @@ public class RabbitMqProducer {
                 channel.addReturnListener((i, s, s1, s2, basicProperties, bytes) -> System.err.println(s + s1 + s2 + bytes));
                 int i = 0;
                 while (i < 10000) {
-                    channel.basicPublish(RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey(), MessageProperties.TEXT_PLAIN, content.getBytes("UTF-8"));
+                    channel.basicPublish(RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey(), MessageProperties.PERSISTENT_TEXT_PLAIN, content.getBytes("UTF-8"));
                     TimeUnit.SECONDS.sleep(5);
                     i++;
                 }
