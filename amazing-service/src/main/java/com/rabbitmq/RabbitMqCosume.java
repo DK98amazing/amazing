@@ -15,12 +15,7 @@ public class RabbitMqCosume {
         try {
             Connection connection = RabbitUtil.getConnection();
             if (null != connection) {
-                Channel channel = connection.createChannel();
-                channel.queueDeclare(RabbitUtil.getQueueName(), true, false, false, null);
-                channel.exchangeDeclare(RabbitUtil.getExchangeName(), BuiltinExchangeType.DIRECT, true);
-                channel.queueBind(RabbitUtil.getQueueName(), RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey());
-                channel.confirmSelect();
-                channel.basicQos(5);
+                Channel channel = RabbitUtil.getChannel();
                 channel.basicConsume(RabbitUtil.getQueueName(), false, "consumer-Tag", new DefaultConsumer(channel) {
                     @Override
                     public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,

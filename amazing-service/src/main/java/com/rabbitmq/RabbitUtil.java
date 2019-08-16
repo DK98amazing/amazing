@@ -1,5 +1,7 @@
 package com.rabbitmq;
 
+import com.rabbitmq.client.BuiltinExchangeType;
+import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.impl.CredentialsProvider;
@@ -72,5 +74,20 @@ public class RabbitUtil {
             }
         }
         return connection;
+    }
+
+    public static Channel getChannel() {
+        Channel channel = null;
+        try {
+            channel = connection.createChannel();
+            channel.queueDeclare(RabbitUtil.getQueueName(), true, false, false, null);
+            channel.exchangeDeclare(RabbitUtil.getExchangeName(), BuiltinExchangeType.DIRECT, true);
+            channel.queueBind(RabbitUtil.getQueueName(), RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey());
+            channel.confirmSelect();
+            channel.basicQos(5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return channel;
     }
 }

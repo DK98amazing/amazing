@@ -18,13 +18,7 @@ public class RabbitMqProducer {
         try {
             Connection connection = RabbitUtil.getConnection();
             if (null != connection) {
-                Channel channel = connection.createChannel();
-                channel.queueDeclare(RabbitUtil.getQueueName(), true, false, false, null);
-                channel.exchangeDeclare(RabbitUtil.getExchangeName(), BuiltinExchangeType.DIRECT, true);
-                System.err.println("queue: " + RabbitUtil.getQueueName());
-                channel.queueBind(RabbitUtil.getQueueName(), RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey());
-                channel.confirmSelect();
-                channel.basicQos(5);
+                Channel channel = RabbitUtil.getChannel();
                 String content = String.format("当前时间：%s", new Date().getTime());
                 channel.addConfirmListener(new ConfirmListener() {
                     @Override
