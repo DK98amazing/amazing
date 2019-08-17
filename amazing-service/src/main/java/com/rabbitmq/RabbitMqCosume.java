@@ -9,6 +9,7 @@ import com.rabbitmq.client.Envelope;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class RabbitMqCosume {
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class RabbitMqCosume {
                         System.err.println(Thread.currentThread().getName());
                         String routingKey = envelope.getRoutingKey(); // 队列名称
                         String contentType = properties.getContentType(); // 内容类型
-                        String content = new String(body, StandardCharsets.UTF_8); // 消息正文
+                        String content = new String(Base64.getDecoder().decode(body), StandardCharsets.UTF_8); // 消息正文
                         System.out.println("消费者TAG: " + consumerTag + " 队列： " + routingKey + " 消息正文：" + content);
                         if (System.currentTimeMillis() % 4 == 0) {
                             System.err.println("拒绝消息");

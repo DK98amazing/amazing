@@ -9,6 +9,9 @@ import com.rabbitmq.client.Return;
 import com.rabbitmq.client.ReturnCallback;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -20,6 +23,7 @@ public class RabbitMqProducer {
             if (null != connection) {
                 Channel channel = RabbitUtil.getChannel();
                 String content = String.format("当前时间：%s", new Date().getTime());
+                byte[] content2Encoder = Base64.getEncoder().encode(content.getBytes(StandardCharsets.UTF_8));
                 channel.addConfirmListener(new ConfirmListener() {
                     @Override
                     public void handleAck(long l, boolean b) throws IOException {
@@ -42,7 +46,7 @@ public class RabbitMqProducer {
                 channel.addReturnListener((i, s, s1, s2, basicProperties, bytes) -> System.err.println(s + s1 + s2 + bytes));
                 int i = 0;
                 while (i < 10000) {
-                    channel.basicPublish(RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey(), MessageProperties.PERSISTENT_TEXT_PLAIN, content.getBytes("UTF-8"));
+                    channel.basicPublish(RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey(), MessageProperties.PERSISTENT_TEXT_PLAIN, content2Encoder);
                     TimeUnit.SECONDS.sleep(5);
                     i++;
                 }
