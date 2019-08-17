@@ -23,6 +23,7 @@ public class RabbitMqProducer {
                 channel.addConfirmListener(new ConfirmListener() {
                     @Override
                     public void handleAck(long l, boolean b) throws IOException {
+                        System.out.println("publish 消息数： " + RabbitUtil.metrics.getPublishedMessages().getCount());
                         System.out.println("l: " + l + " ; b: " + b);
                     }
 

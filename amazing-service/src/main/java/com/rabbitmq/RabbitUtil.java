@@ -1,5 +1,10 @@
 package com.rabbitmq;
 
+import com.codahale.metrics.ConsoleReporter;
+import com.codahale.metrics.CsvReporter;
+import com.codahale.metrics.Metric;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Slf4jReporter;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -11,6 +16,7 @@ import com.rabbitmq.client.impl.nio.NioParams;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class RabbitUtil {
@@ -19,6 +25,8 @@ public class RabbitUtil {
     private static String exchangeName = "test_exchange";
     private static String queueName = "test_queue";
     private static String routeKey = "test_routeKey";
+    private static MetricRegistry registry = new MetricRegistry();
+    public static StandardMetricsCollector metrics = new StandardMetricsCollector(registry);
 
     public static String getRouteKey() {
         return routeKey;
@@ -43,6 +51,7 @@ public class RabbitUtil {
                     connectionFactory.setPassword("guest");
                     connectionFactory.setVirtualHost("/");
                     connectionFactory.setAutomaticRecoveryEnabled(true);
+                    connectionFactory.setNetworkRecoveryInterval(10000);
                     connectionFactory.setConnectionTimeout(1000);
                     connectionFactory.setCredentialsProvider(new CredentialsProvider() {
                         @Override
@@ -62,7 +71,13 @@ public class RabbitUtil {
                         }
                     }));
                     //FIXME:need com/codahale/metrics/MetricRegistry
-//                    connectionFactory.setMetricsCollector(new StandardMetricsCollector());
+                    connectionFactory.setMetricsCollector(metrics);
+                    ConsoleReporter reporter = ConsoleReporter
+                            .forRegistry(registry)
+                            .convertDurationsTo(TimeUnit.MILLISECONDS)
+                            .build();
+                    reporter.start(10, TimeUnit.SECONDS);
+                    connectionFactory.useNio();
                     connectionFactory.setNioParams(new NioParams().setNbIoThreads(2));
                     connectionFactory.setThreadFactory(r -> new Thread(r,"Consumer Thread"));
                     try {
