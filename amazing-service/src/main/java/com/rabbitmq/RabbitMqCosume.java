@@ -10,6 +10,7 @@ import com.rabbitmq.client.Envelope;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.concurrent.TimeUnit;
 
 public class RabbitMqCosume {
     public static void main(String[] args) {
@@ -30,6 +31,11 @@ public class RabbitMqCosume {
                             System.err.println("拒绝消息");
                             channel.basicReject(envelope.getDeliveryTag(), false);
                         } else {
+                            try {
+                                TimeUnit.SECONDS.sleep(6);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             channel.basicAck(envelope.getDeliveryTag(), false); // 手动确认消息【参数说明：参数一：该消息的index；参数二：是否批量应答，true批量确认小于index的消息】
                         }
                     }

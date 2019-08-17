@@ -14,6 +14,8 @@ import com.rabbitmq.client.impl.StandardMetricsCollector;
 import com.rabbitmq.client.impl.nio.NioParams;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -76,12 +78,18 @@ public class RabbitUtil {
                             .forRegistry(registry)
                             .convertDurationsTo(TimeUnit.MILLISECONDS)
                             .build();
-                    reporter.start(10, TimeUnit.SECONDS);
+                    reporter.start(5, TimeUnit.MINUTES);
                     connectionFactory.useNio();
                     connectionFactory.setNioParams(new NioParams().setNbIoThreads(2));
-                    connectionFactory.setThreadFactory(r -> new Thread(r,"Consumer Thread"));
+                    connectionFactory.setThreadFactory(r -> new Thread(r, "Consumer Thread"));
+//                    TODO:TSL
+//                    try {
+//                        connectionFactory.useSslProtocol();
+//                    } catch (NoSuchAlgorithmException | KeyManagementException e) {
+//                        System.err.println("SSL Error");
+//                    }
                     try {
-                        connection = connectionFactory.newConnection();
+                        connection = connectionFactory.newConnection(Executors.newFixedThreadPool(10, connectionFactory.getThreadFactory()));
                     } catch (IOException | TimeoutException e) {
                         e.printStackTrace();
                     }
@@ -99,7 +107,7 @@ public class RabbitUtil {
             channel.exchangeDeclare(RabbitUtil.getExchangeName(), BuiltinExchangeType.DIRECT, true);
             channel.queueBind(RabbitUtil.getQueueName(), RabbitUtil.getExchangeName(), RabbitUtil.getRouteKey());
             channel.confirmSelect();
-            channel.basicQos(5);
+            channel.basicQos(1);
         } catch (IOException e) {
             e.printStackTrace();
         }
