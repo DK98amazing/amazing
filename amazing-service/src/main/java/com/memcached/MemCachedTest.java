@@ -7,9 +7,9 @@ import java.util.concurrent.TimeoutException;
 
 public class MemCachedTest {
     public static void main(String[] args) {
-        MemcachedClient client = MemCached.getMemcachedClient();
+        MemcachedClient client = MemCachedUtil.getMemcachedClient();
         try {
-            client.add("test", 1, "testValue", 3000L);
+            client.add("test", 0, "testValue", 3000L);
             Thread.sleep(2000);
             System.err.println((String) client.get("test"));
         } catch (TimeoutException | InterruptedException | MemcachedException e) {
