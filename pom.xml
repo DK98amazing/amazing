@@ -20,6 +20,7 @@
 		
         <module>common</module>
         <module>amazing-test</module>
+        <module>amazing-vterx</module>
     </modules>
 
     <dependencies>

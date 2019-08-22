@@ -7,6 +7,10 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * TestTemp.
@@ -55,6 +59,20 @@ public class TestTemp {
         int ddd2 = url.lastIndexOf(".");
         System.out.println(sss.substring(0, ddd2 + 1) + "ogg" + sss.substring(ddd-1));
 
+        System.err.println("-----------------------------------------------------");
+        List<String> params = new ArrayList<String>();
+        List<Object> paramValues = new ArrayList<Object>();
+//        params.add("emailAddress");
+        List<String> list = new ArrayList<>();
+        list.add("1111");
+        list.add("2222");
+//        paramValues.add(list);
+        System.err.println(params.size());
+//        System.err.println((Collection)paramValues.toArray(new Object[0])[0]);
+
+        String ivrUri = "sip:IVRBE@10.0.12.89:5090;voicexml=http://10.0.12.89:8070/external/zrg";
+        System.err.println(ivrUri.substring(ivrUri.lastIndexOf('/')+1));
+        System.err.println(UUID.randomUUID().toString().replaceAll("-", "").getBytes().length);
     }
 
     private static void get() {
