@@ -92,7 +92,7 @@ public class MainClass {
             System.err.println("I have received a message: " + event.body());
         });
 
-        Vertx vertxCluster = (Vertx) VertxCluster.getSettableFuture().get();
+        Vertx vertxCluster = (Vertx) ZookeeperVertxCluster.getSettableFuture().get();
         EventBus eventBusCluster = vertxCluster.eventBus();
         eventBusCluster.consumer("10.0.7.173", event -> {
             System.err.println("I have received a message: " + event.body());

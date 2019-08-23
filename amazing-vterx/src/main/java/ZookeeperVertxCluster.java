@@ -6,10 +6,11 @@ import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public class VertxCluster {
+public class ZookeeperVertxCluster {
     public static SettableFuture<Vertx> settableFuture = SettableFuture.create();
 
     public static SettableFuture<Vertx> getSettableFuture() {
@@ -50,5 +51,12 @@ public class VertxCluster {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        clusterManager.join(event -> {
+            System.out.println("####################### join");
+        });
+        clusterManager.leave(event -> {
+            System.out.println("####################### leave");
+        });
     }
 }
