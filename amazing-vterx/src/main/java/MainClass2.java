@@ -5,19 +5,12 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
-import io.vertx.core.impl.JavaVerticleFactory;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.spi.VerticleFactory;
 
 import java.util.Calendar;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.LongAdder;
 
-public class MainClass {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+public class MainClass2 {
+    public static void main(String[] args) {
         Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
         WorkerExecutor workerExecutor = vertx.createSharedWorkerExecutor("my_work_pool");
         workerExecutor.executeBlocking(promise -> {
@@ -59,30 +52,13 @@ public class MainClass {
 
         DeploymentOptions deploymentOptions = new DeploymentOptions().setConfig(new JsonObject().put("name", "test").put("directory", "/bash"));
 
-        final Map<String, LongAdder> threadCounts = new ConcurrentHashMap<>();
-        final CountDownLatch latch = new CountDownLatch(10000);
-        for (int i = 0; i < 10000; i++) {
-            vertx.deployVerticle(new VerticleOne(threadCounts), deploymentOptions, event -> {
-                if (event.succeeded()) {
-//                System.out.println(event.result());
-                } else {
-                    System.out.println(event.cause().toString());
-                }
-                latch.countDown();
-            });
-        }
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        for (Map.Entry entry : threadCounts.entrySet()) {
-            System.out.println("线程： " + entry.getKey() + " = " + entry.getValue());
-        }
-
-        VerticleFactory verticleFactory = new JavaVerticleFactory();
-        vertx.registerVerticleFactory(verticleFactory);
+        vertx.deployVerticle("testVerticle", deploymentOptions, event -> {
+            if (event.succeeded()) {
+                System.out.println(event.result());
+            } else {
+                System.out.println(event.cause().toString());
+            }
+        });
 
         System.err.println(vertx.getOrCreateContext().toString());
         System.err.println(vertx.getOrCreateContext().config().getString("name"));
@@ -92,10 +68,6 @@ public class MainClass {
             System.err.println("I have received a message: " + event.body());
         });
 
-        Vertx vertxCluster = (Vertx) VertxCluster.getSettableFuture().get();
-        EventBus eventBusCluster = vertxCluster.eventBus();
-        eventBusCluster.consumer("10.0.7.173", event -> {
-            System.err.println("I have received a message: " + event.body());
-        });
+        eventBus.send("10.0.7.173", "111111111111111111111111");
     }
 }
