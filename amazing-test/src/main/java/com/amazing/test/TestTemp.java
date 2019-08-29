@@ -1,7 +1,12 @@
 package com.amazing.test;
 
+import com.codahale.metrics.ConsoleReporter;
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.xerial.snappy.Snappy;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -9,8 +14,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * TestTemp.
@@ -70,9 +81,23 @@ public class TestTemp {
         System.err.println(params.size());
 //        System.err.println((Collection)paramValues.toArray(new Object[0])[0]);
 
-        String ivrUri = "sip:IVRBE@10.0.12.89:5090;voicexml=http://10.0.12.89:8070/external/zrg";
-        System.err.println(ivrUri.substring(ivrUri.lastIndexOf('/')+1));
-        System.err.println(UUID.randomUUID().toString().replaceAll("-", "").getBytes().length);
+//        String ivrUri = "sip:IVRBE@10.0.12.89:5090;voicexml=http://10.0.12.89:8070/external/zrg";
+//        System.err.println(ivrUri.substring(ivrUri.lastIndexOf('/')+1));
+//        System.err.println(UUID.randomUUID().toString().replaceAll("-", "").getBytes().length);
+
+        String ssss = new BASE64Encoder().encode("http://10.0.12.61:8080/recorderfileserver/resources/weixin_shortvideo_path/2019_08_28".getBytes()).replace("\r", "").replace("\n", "");
+        System.err.println(ssss);
+        System.err.println(new String(new BASE64Decoder().decodeBuffer("aHR0cDovLzEwLjAuMTIuNjE6ODA4MC9yZWNvcmRlcmZpbGVzZXJ2ZXIvcmVzb3VyY2VzL3dlaXhpbl9zaG9ydHZpZGVvX3BhdGgvMjAxOV8wOF8yOA==")));
+
+        MetricRegistry metricRegistry = new MetricRegistry();
+        Map<Date, Integer> map = new HashMap<>();
+        AtomicInteger i = new AtomicInteger();
+        Gauge gauge = metricRegistry.gauge("testGuage", () -> () -> {map.put(new Date(), i.getAndIncrement());return map;});
+        ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry).convertDurationsTo(TimeUnit.MILLISECONDS).build();
+        reporter.start(1, TimeUnit.SECONDS);
+        new Thread(() -> {
+            while (true){}
+        }).start();
     }
 
     private static void get() {
